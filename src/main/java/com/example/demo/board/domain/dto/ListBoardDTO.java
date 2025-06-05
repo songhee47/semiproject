@@ -1,4 +1,4 @@
-package com.example.demo.member.domain.dto;
+package com.example.demo.board.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +11,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LoginDTO {
+public class ListBoardDTO {
 
+    private String bno;
+    private String title;
     private String userid;
-    private String passwd;
-    private String recaptchaToken;
+    private String regdate;
+    private String thumbs;
+    private String views;
 }
