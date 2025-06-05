@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface BoardRepository {
 
-    @Select("select bno, title, userid, regdate, thumbs, views from boards order by bno desc")
-    List<ListBoardDTO> selectBoard();
+    @Select("select bno, title, userid, regdate, thumbs, views from boards order by bno desc limit #{stnum}, 25")
+    List<ListBoardDTO> selectBoard(int stnum);
 }
