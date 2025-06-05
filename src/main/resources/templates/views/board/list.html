@@ -61,6 +61,19 @@
       <tfoot>
       <tr><td colspan="6">
         <ul class="pagination">
+          <li class="page-item">
+            <a th:href="|/board/list?cpg=${cpg - 1}|" class="page-link">이전</a></li>
+
+          <th:block th:each="i:${#numbers.sequence(stblk, stblk+9)}">
+          <li class="page-item">
+            <a th:href="|/board/list?cpg=${i}|"
+               th:class="${cpg == i} ? 'page-link active' : ''"
+              th:text="${i}">1</a>
+          </li>
+          </th:block>
+
+          <li class="page-item">
+            <a th:href="|/board/list?cpg=${cpg+1}|" class="page-link">다음</a></li>
         </ul>
       </td></tr>
       </tfoot>
