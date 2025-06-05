@@ -1,5 +1,6 @@
 package com.example.demo.board.service;
 
+import com.example.demo.board.domain.Board;
 import com.example.demo.board.domain.dto.ListBoardDTO;
 import com.example.demo.board.repository.BoardRepository;
 import java.util.List;
@@ -17,5 +18,10 @@ public class BoardServiceImpl implements BoardService {
         // cpg에 따라서 시작위치값 계산
         int stnum = (cpg-1)*25;
         return boardMapper.selectBoard(stnum);
+    }
+
+    @Override
+    public Board readOneBoard(int bno) {
+        return boardMapper.selectOneBoard(bno);
     }
 }

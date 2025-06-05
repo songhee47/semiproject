@@ -1,8 +1,10 @@
 package com.example.demo.board.controller;
 
+import com.example.demo.board.domain.Board;
 import com.example.demo.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,4 +31,14 @@ public class BoardController {
 
         return "views/board/list";
     }
+
+    // BoardController
+    @GetMapping("/view")
+    public String view(Model m, int bno) {
+
+        m.addAttribute("bd", boardService.readOneBoard(bno));
+
+        return "views/board/view";
+    }
+
 }
