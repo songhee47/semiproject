@@ -91,18 +91,19 @@ const submitJoinfrm = async (frm) => {
 //frm.passwd.value = await hashPassword(frm.passwd.value);
 //console.log(frm.passwd.value);
 
-let response = grecaptcha.getResponse();
-if(response.length == 0) {
-  alert('자동가입 방지 확인하세요!!');
-  return false;
-}
-console.log(response);
+  // 캡챠 확인
+  let response = grecaptcha.getResponse();
+  if(response.length == 0) {
+    alert('자동가입 방지 확인하세요!!');
+    return false;
+  }
+  console.log(response);
 
 // 폼에 입력된 데이터를 formData 객체로 초기화
   const formData = new FormData(frm);
 
   // recaptcha 토큰 추가
-formData.append('recaptchaToken', response);
+  formData.append('recaptchaToken', response);
 
 // 폼데이터 확인
 console.log(formData);
@@ -144,7 +145,18 @@ return isValid;
 // 로그인 폼 제출
 const submitLoginfrm = async (frm, token, headerName) => {
   //frm.passwd.value = await hashPassword(frm.passwd.value);
+
+  // 캡챠 확인
+  let response = grecaptcha.getResponse();
+  if(response.length == 0) {
+    alert('자동가입 방지 확인하세요!!');
+    return false;
+  }
+
   const formData = new FormData(frm);
+
+  // recaptcha 토큰 추가
+  formData.append('recaptchaToken', response);
 
   fetch('/api/v1/member/login', {
     method: 'POST',

@@ -57,14 +57,17 @@ public class MemberAPIController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginok(LoginDTO member, HttpSession session) {
+    public ResponseEntity<?> loginok(LoginDTO member, HttpSession session, String recaptchaToken) {
         // 로그인 처리시 기타오류 발생에 대한 응답코드 설정
         ResponseEntity<?> response = ResponseEntity.internalServerError().build();
 
         log.info("submit된 로그인 정보 : {}", member);
+        log.info("submit된 응답토큰 : {}", recaptchaToken);
 
         try {
-            // 정상 처리시 상태코드 200으로 응답
+            if(!googleRecaptchaService.verifyRecaptcha(recaptchaToken)) {
+                throw new IllegalStateException("자동 가입방지 오류!!");
+            }
             Member loginUser = memberService.loginMember(member);
             session.setAttribute("loginUser", loginUser);
             session.setMaxInactiveInterval(600);  // 세션 유지 : 10분
