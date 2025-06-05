@@ -36,7 +36,7 @@ public class MemberAPIController {
         log.info("submit된 응답 토큰 : {}", recaptchaToken);
 
         try {
-            if(!googleRecaptchaService.verifyRecaptcha(recaptchaToken)) {
+            if(googleRecaptchaService.verifyRecaptcha(recaptchaToken)) {
                 // 정상 처리시 상태코드 200으로 응답
                 memberService.newMember(member);
             }else{
